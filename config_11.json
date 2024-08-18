@@ -1,6 +1,6 @@
 {
     "wallet": {
-        "addressKeyName": "test",
+        "addressKeyName": "test11",
         "addressRestoreMnemonic": "",
         "alloraHomeDir": "",
         "gas": "1000000",
