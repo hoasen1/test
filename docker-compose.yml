@@ -1,16 +1,14 @@
 services:
   inference:
-    container_name: allora-inference-3
+    container_name: allora-inference-10
     build:
       context: .
     command: python -u /app/app.py
-    environment:
-      - API_PORT=8013
     ports:
-      - "8013:8013"
+      - "8011:8011"
     healthcheck:
-      # test: ["CMD", "curl", "-f", "http://localhost:8013/inference/ETH"]
-      test: ["CMD-SHELL", "curl -f http://localhost:8013/inference/ETH || exit 1 && curl -f http://localhost:8013/inference/BNB || exit 1 && curl -f http://localhost:8013/inference/ARB || exit 1"]
+      # test: ["CMD", "curl", "-f", "http://localhost:8011/inference/ETH"]
+      test: ["CMD-SHELL", "curl -f http://localhost:8011/inference/ETH || exit 1 && curl -f http://localhost:8011/inference/BTC || exit 1 && curl -f http://localhost:8011/inference/SOL || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 12
@@ -19,10 +17,10 @@ services:
       - ./inference-data:/app/data
   
   updater:
-    container_name: allora-updater-3
+    container_name: allora-updater-10
     build: .
     environment:
-      - INFERENCE_API_ADDRESS=http://inference:8013
+      - INFERENCE_API_ADDRESS=http://inference:8011
     command: >
       sh -c "
       while true; do
@@ -34,8 +32,8 @@ services:
       inference:
         condition: service_healthy
     
-  worker:
-    container_name: allora-worker-3
+  worker1:
+    container_name: allora-worker-11
     image: alloranetwork/allora-offchain-node:v0.1.0
     volumes:
       - ./worker-data:/data
@@ -44,7 +42,150 @@ services:
       inference:
         condition: service_healthy
     env_file:
-      - ./worker-data/env_file
+      - ./worker-data/env_file_1
+    entrypoint: ["/node/allora_offchain_node"]
+
+worker2:
+    container_name: allora-worker-12
+    image: alloranetwork/allora-offchain-node:v0.1.0
+    volumes:
+      - ./worker-data:/data
+    working_dir: /data
+    depends_on:
+      inference:
+        condition: service_healthy
+    env_file:
+      - ./worker-data/env_file_2
+    entrypoint: ["/node/allora_offchain_node"]
+
+worker3:
+    container_name: allora-worker-13
+    image: alloranetwork/allora-offchain-node:v0.1.0
+    volumes:
+      - ./worker-data:/data
+    working_dir: /data
+    depends_on:
+      inference:
+        condition: service_healthy
+    env_file:
+      - ./worker-data/env_file_3
+    entrypoint: ["/node/allora_offchain_node"]
+
+worker4:
+    container_name: allora-worker-14
+    image: alloranetwork/allora-offchain-node:v0.1.0
+    volumes:
+      - ./worker-data:/data
+    working_dir: /data
+    depends_on:
+      inference:
+        condition: service_healthy
+    env_file:
+      - ./worker-data/env_file_4
+    entrypoint: ["/node/allora_offchain_node"]
+
+worker5:
+    container_name: allora-worker-15
+    image: alloranetwork/allora-offchain-node:v0.1.0
+    volumes:
+      - ./worker-data:/data
+    working_dir: /data
+    depends_on:
+      inference:
+        condition: service_healthy
+    env_file:
+      - ./worker-data/env_file_5
+    entrypoint: ["/node/allora_offchain_node"]
+
+worker6:
+    container_name: allora-worker-16
+    image: alloranetwork/allora-offchain-node:v0.1.0
+    volumes:
+      - ./worker-data:/data
+    working_dir: /data
+    depends_on:
+      inference:
+        condition: service_healthy
+    env_file:
+      - ./worker-data/env_file_6
+    entrypoint: ["/node/allora_offchain_node"]
+
+worker7:
+    container_name: allora-worker-17
+    image: alloranetwork/allora-offchain-node:v0.1.0
+    volumes:
+      - ./worker-data:/data
+    working_dir: /data
+    depends_on:
+      inference:
+        condition: service_healthy
+    env_file:
+      - ./worker-data/env_file_7
+    entrypoint: ["/node/allora_offchain_node"]
+
+worker8:
+    container_name: allora-worker-18
+    image: alloranetwork/allora-offchain-node:v0.1.0
+    volumes:
+      - ./worker-data:/data
+    working_dir: /data
+    depends_on:
+      inference:
+        condition: service_healthy
+    env_file:
+      - ./worker-data/env_file_8
+    entrypoint: ["/node/allora_offchain_node"]
+
+worker9:
+    container_name: allora-worker-19
+    image: alloranetwork/allora-offchain-node:v0.1.0
+    volumes:
+      - ./worker-data:/data
+    working_dir: /data
+    depends_on:
+      inference:
+        condition: service_healthy
+    env_file:
+      - ./worker-data/env_file_9
+    entrypoint: ["/node/allora_offchain_node"]
+
+worker10:
+    container_name: allora-worker-20
+    image: alloranetwork/allora-offchain-node:v0.1.0
+    volumes:
+      - ./worker-data:/data
+    working_dir: /data
+    depends_on:
+      inference:
+        condition: service_healthy
+    env_file:
+      - ./worker-data/env_file_10
+    entrypoint: ["/node/allora_offchain_node"]
+
+worker11:
+    container_name: allora-worker-21
+    image: alloranetwork/allora-offchain-node:v0.1.0
+    volumes:
+      - ./worker-data:/data
+    working_dir: /data
+    depends_on:
+      inference:
+        condition: service_healthy
+    env_file:
+      - ./worker-data/env_file_11
+    entrypoint: ["/node/allora_offchain_node"]
+
+worker12:
+    container_name: allora-worker-22
+    image: alloranetwork/allora-offchain-node:v0.1.0
+    volumes:
+      - ./worker-data:/data
+    working_dir: /data
+    depends_on:
+      inference:
+        condition: service_healthy
+    env_file:
+      - ./worker-data/env_file_12
     entrypoint: ["/node/allora_offchain_node"]
 
 volumes:
