@@ -7,8 +7,8 @@ services:
     ports:
       - "8080:8080"
     healthcheck:
-      # test: ["CMD", "curl", "-f", "http://localhost:8011/inference/ETH"]
-      test: ["CMD-SHELL", "curl -f http://localhost:8011/inference/ETH || exit 1 && curl -f http://localhost:8011/inference/BTC || exit 1 && curl -f http://localhost:8011/inference/SOL || exit 1"]
+      # test: ["CMD", "curl", "-f", "http://localhost:8013/inference/ETH"]
+      test: ["CMD-SHELL", "curl -f http://localhost:8013/inference/ETH || exit 1 && curl -f http://localhost:8013/inference/BNB || exit 1 && curl -f http://localhost:8013/inference/ARB || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 12
