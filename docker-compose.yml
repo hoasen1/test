@@ -4,8 +4,10 @@ services:
     build:
       context: .
     command: python -u /app/app.py
+    environment:
+      - API_PORT=8013
     ports:
-      - "8080:8080"
+      - "8013:8013"
     healthcheck:
       # test: ["CMD", "curl", "-f", "http://localhost:8013/inference/ETH"]
       test: ["CMD-SHELL", "curl -f http://localhost:8013/inference/ETH || exit 1 && curl -f http://localhost:8013/inference/BNB || exit 1 && curl -f http://localhost:8013/inference/ARB || exit 1"]
