@@ -5,9 +5,9 @@ services:
       context: .
     command: python -u /app/app.py
     environment:
-      - API_PORT=8013
+      - API_PORT=8020  # Change the API port here
     ports:
-      - "8013:8013"
+      - "8020:8020"  # Map the new port here
     healthcheck:
       # test: ["CMD", "curl", "-f", "http://localhost:8013/inference/ETH"]
       test: ["CMD-SHELL", "curl -f http://localhost:8013/inference/ETH || exit 1 && curl -f http://localhost:8013/inference/BNB || exit 1 && curl -f http://localhost:8013/inference/ARB || exit 1"]
